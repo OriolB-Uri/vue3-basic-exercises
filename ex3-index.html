@@ -29,22 +29,22 @@
         <p>Yo soy un gato. Me gustaría que al hacerme click, me ocultaras. Ayuda: <a
                 href="https://vue3-spanish.netlify.app/guide/essentials/class-and-style.html#vinculacion-de-estilos-en-linea">Estilos
                 en línea</a><img width="200" src="https://cdn2.thecatapi.com/images/MTcxMjM2Mg.gif"
-                :style="{display: mustHideCat? 'none': 'block'}" src="" alt=""></p>
+                @click="hideCatImg" :style="{display: mustHideCat? 'none': 'block'}" src="" alt=""></p>
 
         <p>Yo soy un perro. Me gustaría que me ocultaras <strong>Cuando el contador de clicks de más arriba llegara a
                 5! Pista: tienes que establecer adecuadamente la propiedad dinámica :style. NO necesitas variables
                 nuevas ni eventos nuevos!</strong> <img width="200"
-                src="https://cdn2.thedogapi.com/images/rJ6iQeqEm_1280.jpg" src="" alt=""></p>
+                src="https://cdn2.thedogapi.com/images/rJ6iQeqEm_1280.jpg" :style="{display: numClicks >= 5 ? 'none' : 'block'}" src="" alt=""></p>
         <h3>Ejercicio final</h3>
         <p>Fíjate en el array <strong>randomNumbers</strong> declarada en setup()</p>
         <ol>
             <li>Muestra el los valores del array en esta misma línea. Acuerdate que debes pasar todas las variables en
-                la plantilla en la sentencia return: </li>
-            <li>Muestra a continuación el número de elementos del array: </li>
+                la plantilla en la sentencia return: {{randomNumbers}}</li>
+            <li>Muestra a continuación el número de elementos del array: {{randomNumbers.length}}</li>
             <li>Uso el método de array adecuado para convertir en array en un stirng y separar cada elemento del array
-                con un guión a continuación: </li>
+                con un guión a continuación: {{randomNumbers.join(" - ")}}</li>
             <li>Cada vez que hagamos click en este botón, debemos añadir un número aleatorio al array entre 0 y 100:
-                <button>Añadir número</button>
+                <button @click="addRandomNumber">Añadir número</button>
             </li>
             <li>MEGA BONUS: Usa una expresión JavaScript entre mustaches para indicar, usando adecuadamente el método
                 `some`, para detectar si existe un número mayor a 50 </li>
@@ -67,10 +67,21 @@
                     numClicks.value += 1;
                 }
 
+                const hideCatImg = () => {
+                    mustHideCat.value = !mustHideCat.value
+                }
+
+                const addRandomNumber = () => {
+                    randomNumbers.value.push(Math.floor(Math.random() * 101))
+                }
+
                 return {
                     youClickedMe,
+                    hideCatImg,
+                    addRandomNumber,
                     numClicks,
                     mustHideCat,
+                    randomNumbers
                 }
             }
         }).mount('#app')
