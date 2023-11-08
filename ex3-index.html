@@ -21,7 +21,7 @@
         <p>
             Haz lo mismo para el siguiente botón, pero para un evento diferente. Me gustaría que al hacer <strong>doble
                 click</strong>
-            encima del botón, ejecutara la función <em>youClickedMe</em> <button>Double click on me!</button>
+            encima del botón, ejecutara la función <em>youClickedMe</em> <button v-on:dblclick="youClickedMe">Double click on me!</button>
         <p>
             Fijate en el valor inicial de la variable <strong>numClicks</strong>. Incrementa su valor cada vez que
             hagamos click en cualquiera de los botones anteriores <span style="color: blue">{{ numClicks }}</span>
@@ -63,6 +63,8 @@
 
                 const youClickedMe = () => {
                     // Apartado 1
+                    console.log("You clicked me!");
+                    numClicks.value += 1;
                 }
 
                 return {
